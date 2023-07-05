@@ -20,6 +20,7 @@ btnEl.disabled = true
 let valueInputEl;
 let dateArr
 console.log(123);
+let enteredTime
 
 flatpickr(inputEl, {
     enableTime: true,
@@ -34,8 +35,9 @@ flatpickr(inputEl, {
     onClose(selectedDates, dateStr, instance) {
         //console.log("selectedDates[0]", selectedDates[0], "dateStr:", dateStr, instance);
         if ((new Date()) > selectedDates[0]) {
-             Notify.failure('Please choose a date in the future');
-           // console.log(alert("Please choose a date in the future"));
+            Notify.failure('Please choose a date in the future');
+            enteredTime = selectedDates[0]
+           console.log("enteredTime", enteredTime);
             btnEl.classList.add('disable')
             btnEl.disabled = true
             }
@@ -58,17 +60,17 @@ flatpickr(inputEl, {
 btnEl.addEventListener('click', handlerClickStart)
 
 function handlerClickStart() { 
-    setInterval(runTimer, 1000) // dateArr = convertMs(selectedDates[0] - Date.now())
-    function runTimer() {
-for (let i = 0; i < array.length; i++) {
-    const element = array[i];
+//     setInterval(runTimer, 1000) // dateArr = convertMs(selectedDates[0] - Date.now())
+//     function runTimer() {
+// for (let i = 0; i < array.length; i++) {
+//     const element = array[i];
     
-}
-        
-            for (let i = 0; i < dayElAll.length; i++) {
+// }
+        console.log("dateArr", dateArr, dateArr.getTime());
+        for (let i = 0; i < dayElAll.length; i++) {
             dayElAll[i].textContent = Object.values(dateArr)[i]
         }
-    }
+    // }
 
 }
 

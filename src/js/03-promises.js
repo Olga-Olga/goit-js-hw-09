@@ -34,6 +34,7 @@ function createPromise() {
     else {
       rej({ position, delay })
     }
-    });
-    return myPromise
+  });
+  
+  return myPromise
 }

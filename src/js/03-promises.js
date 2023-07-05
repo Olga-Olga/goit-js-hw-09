@@ -18,8 +18,8 @@ submitEl.addEventListener("submit", callback)
 function callback(event) {
   event.preventDefault()
   delay = Number(event.target.elements.delay.value)
-  step = Number(event.target.elements.delay.step)
-  amount = Number(event.target.elements.delay.amount)
+  step = Number(event.target.elements.step.value)
+  amount = Number(event.target.elements.amount.value);
   console.log(delay, step, amount);
   //Напиши скрипт, який на момент сабміту форми викликає функцію
   //createPromise(position, delay) стільки разів,

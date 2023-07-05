@@ -60,7 +60,11 @@ btnEl.addEventListener('click', handlerClickStart)
 function handlerClickStart() { 
     setInterval(runTimer, 1000) // dateArr = convertMs(selectedDates[0] - Date.now())
     function runTimer() {
-            dateArr = convertMs(selectedDates[0] - Date.now())
+for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    
+}
+        
             for (let i = 0; i < dayElAll.length; i++) {
             dayElAll[i].textContent = Object.values(dateArr)[i]
         }

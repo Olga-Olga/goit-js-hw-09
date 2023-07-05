@@ -11,33 +11,31 @@ const btnEl = document.querySelector('[data-start]')
 // console.dir(timesEl.children[1].children[0].textContent);
 // console.dir(timesEl.children[2].children[0].textContent);
 // console.dir(timesEl.children[3].children[0].textContent);
+// console.dir(dayElAll.children)
 
 const dayElAll = document.querySelectorAll('.timer .value')
-dayElAll.forEach(el => console.log(el.textContent))
+
 
 btnEl.disabled = true
 
 let valueInputEl;
 let dateArr
-console.log(123);
+console.log("Dobrogo ranku");
 let enteredTime
 
 flatpickr(inputEl, {
     enableTime: true,
-    // dateFormat: "Y-m-d H:i",
+    dateFormat: "Y-m-d H:i",
     time_24hr: true,
-    // altInput: true,
+    altInput: true,
     onValueUpdate: function (selectedDates, dateStr, instance) {
     valueInputEl = inputEl.value
     },
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates, dateStr, instance) {
-        //console.log("selectedDates[0]", selectedDates[0], "dateStr:", dateStr, instance);
         if ((new Date()) > selectedDates[0]) {
             Notify.failure('Please choose a date in the future');
-            enteredTime = selectedDates[0]
-           console.log("enteredTime", enteredTime);
             btnEl.classList.add('disable')
             btnEl.disabled = true
             }
@@ -46,35 +44,47 @@ flatpickr(inputEl, {
             Notify.success('Press the Start button to invoke timer!');
             console.log("miliseconds", selectedDates[0].getTime());
             console.log("dateStr:", dateStr);
-       
+            enteredTime = selectedDates[0]
+            console.log("enteredTime", enteredTime);       
             dateArr = convertMs(selectedDates[0] - Date.now())
             console.log("convertMs(selectedDates[0] після конвертації", dateArr);
-
         }
-
     },
-
 });
 
 
 btnEl.addEventListener('click', handlerClickStart)
 
-function handlerClickStart() { 
-//     setInterval(runTimer, 1000) // dateArr = convertMs(selectedDates[0] - Date.now())
-//     function runTimer() {
-// for (let i = 0; i < array.length; i++) {
-//     const element = array[i];
-    
-// }
-        console.log("dateArr", dateArr, dateArr.getTime());
-        for (let i = 0; i < dayElAll.length; i++) {
-            dayElAll[i].textContent = Object.values(dateArr)[i]
+function handlerClickStart() {
+    const int = setInterval(runTimer, 1000)
+    function runTimer() {
+        dateArr = enteredTime - Date.now()
+        const timeLeft = convertMs(dateArr)
+        if (dateArr <= 0) {
+            clearInterval(int)
+            return;
         }
-    // }
+        // for (let i = 0; i < dayElAll.length; i++) {
+        //     dayElAll[i].textContent = Object.values(timeLeft)[i]
+        // }
 
+        for (const key of Object.keys(timeLeft)) {
+                dayElAll.forEach(el => {
+                    if (Object.keys(el.dataset)[0] === key) {
+                        el.textContent = addLeadingZero(timeLeft[key])
+                    }
+                }
+            )
+        }
+   
+    }
 }
 
+function addLeadingZero(value) {
+    return String(value).padStart(2, '0') 
+}
 
+console.log(addLeadingZero(6));
 
 function convertMs(ms) {
   const second = 1000;

@@ -8,23 +8,21 @@ submitEl.addEventListener("submit", callback)
 
 function callback(event) {
   event.preventDefault()
- const {delay, step, amount} = event.target.elements
+  const { delay, step, amount } = event.target.elements
   delay = Number(delay.value)
   step = Number(step.value)
   amount = Number(amount.value);
-
-for (let i = 0; i <= amount; i++) {
-  setTimeout(() => { 
-    createPromise(i, step)
-  .then(({ position, delay }) => {
-    console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-  })
-  .catch(({ position, delay }) => {
-    console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-  });
-  }, step)
-}
-   
+  for (let i = 0; i <= amount; i++) {
+    setTimeout(() => {
+      createPromise(i, step)
+        .then(({ position, delay }) => {
+          console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        })
+        .catch(({ position, delay }) => {
+          console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+        });
+    }, step)
+  }
 }
 
 function createPromise() {

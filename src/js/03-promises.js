@@ -8,10 +8,10 @@ submitEl.addEventListener("submit", callback)
 
 function callback(event) {
   event.preventDefault()
-  const { delay, step, amount } = event.target.elements
-  delay = Number(delay.value)
-  step = Number(step.value)
-  amount = Number(amount.value);
+  // const { delay, step, amount } = event.target.elements
+  delay = Number(event.target.elements.delay.value)
+  step = Number(event.target.elements.step.value)
+  amount = Number(event.target.elements.amount.value);
   for (let i = 0; i <= amount; i++) {
     setTimeout(() => {
       createPromise(i, step)

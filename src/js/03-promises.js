@@ -15,7 +15,7 @@ function callback(event) {
 
 for (let i = 0; i <= amount; i++) {
   setTimeout(() => { 
-    createPromise(i, delay)
+    createPromise(i, step)
   .then(({ position, delay }) => {
     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
   })

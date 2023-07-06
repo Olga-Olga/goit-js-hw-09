@@ -1,3 +1,5 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 let delay
 let step
 let amount
@@ -12,17 +14,22 @@ function callback(event) {
   delay = Number(event.target.elements.delay.value)
   step = Number(event.target.elements.step.value)
   amount = Number(event.target.elements.amount.value);
-  for (let i = 0; i <= amount; i++) {
-    setTimeout(() => {
+   Notify.success(`Get valuve: ${delay}, ${step}, ${amount}`)
+  setTimeout(() => {
+    
+  for (let i = 0; i <= amount; i++) {    
       createPromise(i, step)
         .then(({ position, delay }) => {
           console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+          Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
         })
         .catch(({ position, delay }) => {
           console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+          Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
         });
-    }, step)
   }
+    
+  }, delay)
 }
 
 function createPromise() {

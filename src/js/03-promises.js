@@ -14,10 +14,10 @@ function callback(event) {
   delay = Number(event.target.elements.delay.value)
   step = Number(event.target.elements.step.value)
   amount = Number(event.target.elements.amount.value);
-   Notify.success(`Get valuve: ${delay}, ${step}, ${amount}`)
+  Notify.warning(`Get valuve: ${delay}, ${step}, ${amount}`)
   setTimeout(() => {
-    
-  for (let i = 0; i <= amount; i++) {    
+
+  for (let i = 0; i < amount; i++) {    
       createPromise(i, step)
         .then(({ position, delay }) => {
           console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -32,7 +32,7 @@ function callback(event) {
   }, delay)
 }
 
-function createPromise() {
+function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;  
   const myPromise = new Promise((res, rej) => {
     if (shouldResolve) {
